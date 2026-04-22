@@ -18,6 +18,8 @@ FROM node:22-alpine AS production
 RUN apk update && apk upgrade --no-cache
 WORKDIR /app
 
+ENV NODE_ENV=production
+
 # Création d'un utilisateur non-root pour la sécurité
 RUN addgroup -S appgroup && adduser -S appuser -G appgroup
 
@@ -31,9 +33,7 @@ COPY --from=builder --chown=appuser:appgroup /app/package.json ./
 
 # On passe sur l'utilisateur limité
 USER appuser
-
 EXPOSE 3000
-ENV NODE_ENV=production
 
 # Le Healthcheck demandé par le CTO (utilise ton endpoint /health)
 HEALTHCHECK --interval=30s --timeout=10s --retries=3 \
