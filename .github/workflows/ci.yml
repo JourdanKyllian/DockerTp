@@ -87,5 +87,5 @@ jobs:
         with:
           image-ref: 'ghcr.io/jourdankyllian/dockertp:latest'
           format: 'table'
-          severity: 'CRITICAL'
+          severity: 'CRITICAL, HIGH'
           exit-code: '1'
