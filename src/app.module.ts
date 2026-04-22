@@ -10,17 +10,17 @@ import { HealthController } from './health/health.controller';
     TypeOrmModule.forRoot({
       type: 'postgres',
       host: process.env.DB_HOST || 'localhost',
-      port: 5432,
+      port: parseInt(process.env.DB_PORT || '5432', 10),
       username: process.env.DB_USER || 'postgres',
       password: process.env.DB_PASSWORD || 'password',
       database: process.env.DB_NAME || 'todo_db',
       entities: [Task],
-      synchronize: true, // Auto-création des tables (OK pour le TP)
+      synchronize: true,
     }),
     RedisModule.forRoot({
       config: {
         host: process.env.REDIS_HOST || 'localhost',
-        port: 6379,
+        port: parseInt(process.env.REDIS_PORT || '6379', 10),
       },
     }),
     TasksModule,
