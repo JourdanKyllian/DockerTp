@@ -1,5 +1,6 @@
 # ========== STAGE 1 : Build ==========
 FROM node:22-alpine AS builder
+RUN apk update && apk upgrade --no-cache
 WORKDIR /app
 
 RUN apk update && apk upgrade --no-cache
@@ -17,6 +18,7 @@ RUN npm prune --production --legacy-peer-deps
 
 # ========== STAGE 2 : Production ==========
 FROM node:22-alpine AS production
+RUN apk update && apk upgrade --no-cache
 WORKDIR /app
 
 # Création d'un utilisateur non-root pour la sécurité
