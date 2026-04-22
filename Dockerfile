@@ -15,8 +15,13 @@ RUN npm prune --production --legacy-peer-deps
 
 # ========== STAGE 2 : Production ==========
 FROM node:22-alpine AS production
-RUN apk update && apk upgrade --no-cache
-RUN npm install -g npm@latest
+
+RUN apk update && apk upgrade --no-cache && \
+    rm -rf /usr/local/lib/node_modules/npm \
+    /usr/local/bin/npm \
+    /usr/local/bin/npx \
+    /usr/local/lib/node_modules/corepack
+
 WORKDIR /app
 
 ENV NODE_ENV=production
