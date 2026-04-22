@@ -1,9 +1,6 @@
 # ========== STAGE 1 : Build ==========
 FROM node:22-alpine AS builder
-RUN apk update && apk upgrade --no-cache
 WORKDIR /app
-
-RUN apk update && apk upgrade --no-cache
 
 # On profite du cache des layers pour les dépendances
 COPY package*.json ./
