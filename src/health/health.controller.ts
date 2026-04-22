@@ -12,12 +12,12 @@ export class HealthController {
 
   @Get()
   async check(@Res() res: Response) {
-    const health: any = { status: 'healthy', timestamp: new Date().toISOString() };
+    const health: Record<string, any> = { status: 'healthy', timestamp: new Date().toISOString() };
     
     try {
       await this.dataSource.query('SELECT 1');
       health.database = 'connected';
-    } catch (e) {
+    } catch {
       health.status = 'unhealthy';
       health.database = 'disconnected';
     }
@@ -26,7 +26,7 @@ export class HealthController {
       const client = this.redisService.getOrThrow();
       await client.ping();
       health.cache = 'connected';
-    } catch (e) {
+    } catch {
       health.status = 'unhealthy';
       health.cache = 'disconnected';
     }
