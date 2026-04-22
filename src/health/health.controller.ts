@@ -12,7 +12,11 @@ export class HealthController {
 
   @Get()
   async check(@Res() res: Response) {
-    const health: Record<string, any> = { status: 'healthy', timestamp: new Date().toISOString() };
+    const health: Record<string, any> = {
+      status: 'healthy',
+      timestamp: new Date().toISOString(),
+      version: process.env.APP_VERSION || 'unknown'
+    };
     
     try {
       await this.dataSource.query('SELECT 1');
