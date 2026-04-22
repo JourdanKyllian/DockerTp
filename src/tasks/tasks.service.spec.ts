@@ -14,7 +14,7 @@ describe('TasksService', () => {
           provide: getRepositoryToken(Task),
           useValue: {
             find: jest.fn(),
-            findOne: jest.fn(),
+            findOneBy: jest.fn(),
             save: jest.fn(),
             delete: jest.fn(),
           },
