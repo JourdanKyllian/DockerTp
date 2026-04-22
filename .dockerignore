@@ -10,5 +10,4 @@ tests
 .eslintrc*
 .prettierrc*
 docker-compose*.yml
-Dockerfile
 npm-debug.log
